@@ -2,7 +2,7 @@ name: Merge dependabot PRs
 # Merge is done by adding a comment command @dependabot squash and merge
 # which does the merge when pipelines are green
 on:
-  pull_requests:
+  pull_request:
     types:
       - opened
 jobs:
