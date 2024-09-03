@@ -2,21 +2,16 @@ name: Merge dependabot PRs
 # Merge is done by adding a comment command @dependabot squash and merge
 # which does the merge when pipelines are green
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, reopened]
 jobs:
   add-comment:
     if: startsWith(github.head_ref, 'dependabot/npm_and_yarn/javascript/')
     runs-on: ubuntu-latest
     steps:
-      - name: 'Comment on PR'
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.AUTOREBASE_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: '@dependabot squash and merge'
-            });
+      - name: Enable auto-merge for Dependabot PRs
+        if: ${{ contains(github.event.pull_request.title, 'bump')}}
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.AUTOREBASE_TOKEN}}
