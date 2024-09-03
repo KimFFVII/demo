@@ -6,7 +6,7 @@ on:
     types: [opened, reopened]
 jobs:
   add-comment:
-    if: github.event.pull_request.user.login == 'dependabot' && startsWith(github.head_ref, 'dependabot/npm_and_yarn/javascript/')
+    if: startsWith(github.head_ref, 'dependabot/npm_and_yarn/javascript/')
     runs-on: ubuntu-latest
     steps:
       - name: 'Comment on PR'
