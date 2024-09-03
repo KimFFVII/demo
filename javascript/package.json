@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "nx": "18.3.5",
-    "@nx/deevkit": "18.3.5"
+    "@nx/devkit": "18.3.5"
   }
 }
