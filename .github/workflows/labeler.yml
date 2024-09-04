@@ -9,4 +9,9 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v5
+    - name: Label
+      uses: actions/labeler@v5
+    - name: AUTO REBASE
+      uses: Label305/AutoRebase@v0.1
+      with:
+        github_token: ${{ secrets.AUTOREBASE_TOKEN }}
