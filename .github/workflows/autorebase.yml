@@ -13,6 +13,8 @@ jobs:
         contains(github.event.comment.body, '/autosquash')
       )
     steps:
+      - name: Echo
+        run: echo "AUTO REBASE 0"
       - name: Checkout the latest code
         uses: actions/checkout@v3
         with:
