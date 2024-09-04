@@ -9,3 +9,5 @@ jobs:
     steps:
       - name: Enable auto-merge for Dependabot PRs
         run: gh pr merge --rebase main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
