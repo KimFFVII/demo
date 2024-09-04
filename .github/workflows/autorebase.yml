@@ -6,7 +6,7 @@ jobs:
   rebase:
     name: Rebase and merge
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'migrate-nx-to-')
+    if: startsWith(github.head_ref, 'migrate-nx-to-asd')
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
