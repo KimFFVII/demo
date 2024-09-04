@@ -3,12 +3,24 @@ on:
   pull_request_target:
     types: [opened, reopened]
 jobs:
-  add-comment:
-    if: startsWith(github.head_ref, 'migrate-nx-to-')
+  rebase:
+    name: Rebase
     runs-on: ubuntu-latest
+    if: >-
+      github.event.issue.pull_request != '' && 
+      (
+        contains(github.event.comment.body, '/rebase') || 
+        contains(github.event.comment.body, '/autosquash')
+      )
     steps:
-      - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --rebase "$PR_URL"
+      - name: Checkout the latest code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+      - name: Automatic Rebase
+        uses: cirrus-actions/rebase@1.8
+        with:
+          autosquash: ${{ contains(github.event.comment.body, '/autosquash') || contains(github.event.comment.body, '/rebase-autosquash') }}
         env:
-          PR_URL: ${{github.event.pull_request.html_url}}
-          GITHUB_TOKEN: ${{secrets.AUTOREBASE_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
