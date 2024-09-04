@@ -1,7 +1,7 @@
 name: Rebase
 on:
-  pull_request:
-    types: [created, labeled]
+  pull_request_target:
+    types: [created, labeled, opened, reopened]
 jobs:
   rebase:
     name: Rebase
