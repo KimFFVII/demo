@@ -1,11 +1,17 @@
 name: Rebase
 on:
-  pull_request_target:
-    types: [opened, reopened]
+  issue_comment:
+    types: [created]
 jobs:
   rebase:
     name: Rebase
     runs-on: ubuntu-latest
+    if: >-
+      github.event.issue.pull_request != '' && 
+      (
+        contains(github.event.comment.body, '/rebase') || 
+        contains(github.event.comment.body, '/autosquash')
+      )
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v3
