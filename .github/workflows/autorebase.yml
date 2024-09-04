@@ -6,18 +6,6 @@ jobs:
   rebase:
     name: Rebase
     runs-on: ubuntu-latest
-    if: ${{ github.event.label.name == 'autorebase:opt-in' }}
     steps:
-      - name: Echo
-        run: echo "AUTO REBASE 0"
-      - name: Checkout the latest code
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-      - name: Automatic Rebase
-        uses: cirrus-actions/rebase@1.8
-        with:
-          autosquash: ${{ contains(github.event.comment.body, '/autosquash') || contains(github.event.comment.body, '/rebase-autosquash') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --rebase main
