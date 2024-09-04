@@ -1,18 +1,22 @@
 name: Rebase
 on:
   pull_request_target:
-    types: [created, labeled, opened, reopened]
+    types: [created, opened, reopened]
 jobs:
   rebase:
     name: Rebase
     runs-on: ubuntu-latest
     steps:
+      - name: Echo
+        run: echo "AUTO REBASE 0"
       - name: Checkout the latest code
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-      - name: Enable auto-merge for Dependabot PRs
-        run: gh pr merge --rebase main
+      - name: Automatic Rebase
+        uses: cirrus-actions/rebase@1.8
+        with:
+          autosquash: ${{ contains(github.event.comment.body, '/autosquash') || contains(github.event.comment.body, '/rebase-autosquash') }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
