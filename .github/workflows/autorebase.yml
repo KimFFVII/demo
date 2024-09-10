@@ -23,7 +23,7 @@ jobs:
         with:
           script: |
             const result = await github.pulls.createReview({
-            owner: 'KimFFVII',
+            owner: 'github-actions[bot]',
             repo: context.repo.repo,
             pull_number: context.issue.number,
             event: "APPROVE"
