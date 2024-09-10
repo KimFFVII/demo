@@ -13,6 +13,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+      - name: Change git config
+        run: |
+          gh config set user.name "KimFFVII"
       - name: Automatic Rebase
         if: ${{ contains(github.event.pull_request.title, 'rebase')}}
         uses: cirrus-actions/rebase@1.8
