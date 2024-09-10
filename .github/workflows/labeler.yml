@@ -20,13 +20,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "gh pr list"
         prs=$(gh pr list \
             --repo "$GITHUB_REPOSITORY" \
             --head 'dev' \
             --base 'master' \
             --json title \
             --jq 'length')
+        echo ${#prs[@]}
         if ((prs > 0)); then
             echo "skip=true" >> "$GITHUB_OUTPUT"
         fi
