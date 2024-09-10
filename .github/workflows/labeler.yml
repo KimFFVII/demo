@@ -23,10 +23,9 @@ jobs:
     - name: Check if at least one PR exists
       id: check-prs
       run: |
-        prs=$(gh pr list \
-          --json title \
-          --jq 'length')
-        echo Size of PRS ARRAY: ${#pr}
+        prs=$(gh pr list)
+        gh pr list
+        echo Size of PRS ARRAY: ${#pr[@]}
         echo "exists=true" >> "$GITHUB_OUTPUT"
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
