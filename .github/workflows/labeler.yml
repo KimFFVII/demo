@@ -24,7 +24,7 @@ jobs:
       id: check-prs
       run: |
         gh pr list
-        prs=$(gh pr list --json state -q 'length')
+        prs=$(gh pr list --json state=OPEN -q 'length')
         echo Size of PRS ARRAY: $pr
         echo "exists=true" >> "$GITHUB_OUTPUT"
       env:
