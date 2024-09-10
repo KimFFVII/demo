@@ -20,8 +20,14 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-    - name: Check if PR exists
-      id: check
-      run: gh pr list
+    - name: Check if at least one PR exists
+      id: check-prs
+      run: |
+        prs=$(gh pr list)
+        echo Size of PRS ARRAY: ${#prs[@]}
+        echo "exists=true" >> "$GITHUB_OUTPUT"
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - name: Found PRs
+      if: 'jobs.steps.check-prs.outputs.exists'
+      run: echo Found at least one PR
