@@ -15,6 +15,11 @@ jobs:
       uses: Label305/AutoRebase@v0.1
       with:
         github_token: ${{ secrets.AUTOREBASE_TOKEN }}
+    - name: Checkout the latest code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
     - name: Check if PR exists
       id: check
       run: gh pr list
