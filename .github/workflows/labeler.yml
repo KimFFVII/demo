@@ -15,3 +15,18 @@ jobs:
       uses: Label305/AutoRebase@v0.1
       with:
         github_token: ${{ secrets.AUTOREBASE_TOKEN }}
+    - name: Check if PR exists
+      id: check
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        echo gh pr list
+        prs=$(gh pr list \
+            --repo "$GITHUB_REPOSITORY" \
+            --head 'dev' \
+            --base 'master' \
+            --json title \
+            --jq 'length')
+        if ((prs > 0)); then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+        fi
