@@ -27,11 +27,11 @@ jobs:
         prs=$(gh pr list --json state -q 'length')
         echo Size of PRS ARRAY: $prs
         echo "exists=true" >> "$GITHUB_OUTPUT"
-        if (prs > 0); then
+        if ((prs > 0)); then
           echo "exist=true" >> "$GITHUB_OUTPUT"
         fi
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Found PRs
-      if: '!steps.check-prs.outputs.exists'
+      if: 'steps.check-prs.outputs.exists'
       run: echo Found at least one PR
