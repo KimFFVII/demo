@@ -29,5 +29,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - name: Found PRs
-      if: 'jobs.steps.check-prs.outputs.exists'
+      if: 'steps.check-prs.outputs.exists'
       run: echo Found at least one PR
