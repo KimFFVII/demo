@@ -9,7 +9,9 @@ jobs:
     if: startsWith(github.head_ref, 'migrate-nx-to-')
     steps:
       - name: Change git config
-        run: gh config set user.name "KimFFVII"
+        run: |
+          gh auth status
+          gh config set user.name "KimFFVII"
       - name: Checkout the latest code
         uses: actions/checkout@v4
         with:
