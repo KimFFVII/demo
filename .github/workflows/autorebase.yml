@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     if: startsWith(github.head_ref, 'migrate-nx-to-')
     steps:
-      - name: Change git config
-        run: |
-          git config user.name "KimFFVII"
       - name: Checkout the latest code
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+      - name: Change git config
+        run: |
+          git config user.name "KimFFVII"
       - name: Automatic Rebase
         if: ${{ contains(github.event.pull_request.title, 'rebase')}}
         uses: cirrus-actions/rebase@1.8
