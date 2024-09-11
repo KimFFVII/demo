@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Change git config
         run: |
-          gh auth status
+          gh config list
           gh config set user.name "KimFFVII"
       - name: Checkout the latest code
         uses: actions/checkout@v4
