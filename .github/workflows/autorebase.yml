@@ -5,17 +5,25 @@ on:
 jobs:
   rebase:
     name: Rebase and merge
+    if: >- 
+      startsWith(github.head_ref, 'migrate-nx-to-'
+      ) fi
+      - name: Checkout the latest code
+          uses: actions/checkout@v4
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+      - name: Change git config
+          run: |
+            git config user.name "tkit-dev"
+            git config user.email "tkit-dev@1000kit.org"
     runs-on: ubuntu-latest
-    if: startsWith(github.head_ref, 'migrate-nx-to-')
     steps:
       - name: Checkout the latest code
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-      - name: Change git config
-        run: |
-          git config user.name "KimFFVII"
       - name: Automatic Rebase
         if: ${{ contains(github.event.pull_request.title, 'rebase')}}
         uses: cirrus-actions/rebase@1.8
