@@ -31,8 +31,8 @@ jobs:
         for i in "${prs1[@]}"
         do
           echo "$i"
-          echo "${prs1[$i]}"
-          echo "${prs1[0]}".url
+          #echo "${prs1[$i]}"
+          #echo "${prs1[0]}".url
         done
         echo "exists=true" >> "$GITHUB_OUTPUT"
         if ((prs > 0)); then
