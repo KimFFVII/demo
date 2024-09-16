@@ -28,11 +28,11 @@ jobs:
         echo Size of PRS ARRAY: $prs
         prs1=$(gh pr list --author "dependabot[bot]" --json url)
         echo PRS1 ARRAY: $prs1
-        for i in "${arr[@]}"
+        for i in "${prs1[@]}"
         do
           echo "$i"
-          echo "${arr[$i]}"
-          echo "${arr[0]}".url
+          echo "${prs1[$i]}"
+          echo "${prs1[0]}".url
         done
         echo "exists=true" >> "$GITHUB_OUTPUT"
         if ((prs > 0)); then
