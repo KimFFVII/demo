@@ -5,7 +5,7 @@ on:
 jobs:
   rebase:
     name: Rebase and merge
-    if: startsWith(github.head_ref, 'migrate-nx-to-'
+    if: startsWith(github.head_ref, 'migrate-nx-to-')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the latest code
