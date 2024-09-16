@@ -14,7 +14,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
       - name: list PRs
-        run: gh pr list --author "dependabot[bot]"
+        run: |
+          gh pr list --author "dependabot[bot]"
+          gh pr --json url
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Automatic Rebase
