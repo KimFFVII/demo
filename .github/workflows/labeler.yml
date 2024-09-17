@@ -32,7 +32,7 @@ jobs:
         do
           echo "$i"
           #echo "${prs1[$i]}"
-          #echo "${prs1[0]}".url
+          echo "${prs1[1]}"
         done
         echo "exists=true" >> "$GITHUB_OUTPUT"
         if ((prs > 0)); then
