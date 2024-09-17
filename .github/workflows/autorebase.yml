@@ -26,7 +26,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Auto Approve
         run: |
-          gh config set user.name "KimFFVII"
+          #git config --global user.email "you@example.com"
+          git config --global user.name "KimFFVII"
           gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
