@@ -27,7 +27,7 @@ jobs:
         run: |
           #git config --global user.email "you@example.com"
           git config --global user.name "KimFFVII"
-          gh pr review --approve "$PR_URL"
+          #gh pr review --approve "$PR_URL"
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
