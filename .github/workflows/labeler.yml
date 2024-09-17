@@ -26,7 +26,7 @@ jobs:
         gh pr list
         prs=$(gh pr list --json state -q 'length')
         echo Size of PRS ARRAY: $prs
-        prs1=$(gh pr list --author "dependabot[bot]" --json url)
+        prs1=$(gh pr list --author "dependabot[bot]" --json url --jq '.[].url')
         echo PRS1 ARRAY: $prs1
         for i in "${prs1[@]}"
         do
