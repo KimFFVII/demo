@@ -16,7 +16,6 @@ jobs:
       - name: list PRs
         run: |
           gh pr list --author "dependabot[bot]"
-          gh pr --json url
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Automatic Rebase
